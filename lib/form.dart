@@ -37,7 +37,7 @@ class _PrescriptionState extends State<Prescription> {
   DateTime userSubmissionTime;
   String userFileName = "";
   String userGrade = "";
-String url="";
+  String url="";
   Future getFileAndUpload() async {
 //    FilePickerResult result;
 //    try {
@@ -68,7 +68,7 @@ String url="";
 //    }
 
     dynamic imgFile = await ImagePicker.platform.pickImage(
-        source: ImageSource.gallery,
+      source: ImageSource.gallery,
 
     );
 //    List<File> images = [];
@@ -175,7 +175,7 @@ String url="";
                 ),
                 SizedBox(height: 20.0),
 
-             _loadingPath?Center(child: CircularProgressIndicator(),) :   ElevatedButton(
+                _loadingPath?Center(child: CircularProgressIndicator(),) :   ElevatedButton(
 //                    color: Colors.pink[400],
                     child: Text("Upload Prescription"),
                     onPressed: (){
@@ -185,7 +185,7 @@ String url="";
 //                      if(key.currentState.validate()){
 //                      DatabaseService(uid: user.uid).adddata(drname, description, medicines);
 //                      Navigator.pop(context);
-                    getFileAndUpload();
+                      getFileAndUpload();
 //                      }
                     }
 
@@ -201,8 +201,8 @@ String url="";
                       print(description);
                       print(medicines);
 //                      if(key.currentState.validate()){
-                         DatabaseService(uid: user.uid).adddata(doctor: drname,description: description,medicines: medicines,url: url,prescText: presctext,date: userSubmissionTime);
-                        Navigator.pop(context);
+                      DatabaseService(uid: user.uid).adddata(doctor: drname,description: description,medicines: medicines,url: url,prescText: presctext,date: userSubmissionTime);
+                      Navigator.pop(context);
 //                      }
                     }
 
