@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medhelp/raj/colorsss.dart';
 import 'package:medhelp/raj/linechart.dart';
@@ -18,11 +20,25 @@ class _RHomeState extends State<RHome> {
   int sleep=0;
   int training=0;
   int heartbeat=0;
-  addCal(){
-    setState(() {
-      calories=calories+100;
-    });
+
+  addDailyHealthRecord()async{
+    CollectionReference users = FirebaseFirestore.instance.collection('Home');
+    User user = FirebaseAuth.instance.currentUser;
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+    // if (!documentSnapshot.exists) {
+      users.doc(user.uid).collection('daily').doc().set({
+        "walk":walk,
+        "calories":calories,
+        "sleep": sleep,
+        "training":training,
+        "heartbeat":heartbeat,
+      });
+    // }
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -397,7 +413,9 @@ class _RHomeState extends State<RHome> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: MyColor.secondary,
-        onPressed: (){},
+        onPressed: (){
+          addDailyHealthRecord();
+        },
         child: Icon(
           Icons.add,
           color: Colors.white,
