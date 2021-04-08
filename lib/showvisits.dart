@@ -22,9 +22,9 @@ class _ShowVisitsState extends State<ShowVisits> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Your Sittings"),
-      ),
+//      appBar: AppBar(
+//        title: Text("Your Sittings"),
+//      ),
       body: StreamBuilder(
           stream: prescription.doc(user.uid).collection('pres').snapshots(),
           builder: (BuildContext context,

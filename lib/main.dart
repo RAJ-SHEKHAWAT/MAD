@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:medhelp/newhome.dart';
 import 'package:medhelp/pranav/textToSpeech.dart';
 import 'package:medhelp/raj/home.dart';
 import 'package:medhelp/showvisits.dart';
@@ -172,15 +173,77 @@ class _MainPageState extends State<MainPage> {
         }, child: Text("Yukta")),
       ],
     ),
-    body: Padding(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          const SizedBox(height: 25),
+    body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomLeft,
+          colors: [Colors.blue[200],Colors.blue[50]],
+        ),
+      ),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 200,
 
-          const SizedBox(height: 15),
+          ),
+
+          Padding(
+            padding:   EdgeInsets.fromLTRB(100, 10, 100, 10),
+            child: RaisedButton(
+              textColor: Colors.teal,
+              color: Colors.white,
+              child: Text("Fitness Zone",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => RHome()));
+              },
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0),
+              ),
+            ),
+          ),
+//          SizedBox(
+//            height: 10.0,
+//          ),
+          Padding(
+            padding:  EdgeInsets.fromLTRB(100, 10, 100, 10),
+            child: RaisedButton(
+              textColor: Colors.teal,
+              color: Colors.white,
+              child: Text("Medical Zone",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => NewHome()));
+
+              },
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0),
+              ),
+            ),
+          ),
+
+
+
+
+
+
+
+
+
         ],
       ),
+
+
+
     ),
   );
 }

@@ -89,7 +89,8 @@ class _RHomeState extends State<RHome> {
         ],
       ),
       body: Container(
-        color: Colors.white,
+
+
         child: ListView(
           children: [
             Container(
