@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medhelp/form.dart';
 import 'package:medhelp/showvisits.dart';
+import 'package:medhelp/widget/text_recognition_widget.dart';
 class NewHome extends StatefulWidget {
   @override
   _NewHomeState createState() => _NewHomeState();
@@ -10,7 +11,7 @@ class _NewHomeState extends State<NewHome> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xff9ad7e9),
@@ -48,6 +49,16 @@ class _NewHomeState extends State<NewHome> {
                   ),
                 ),
               ),
+              Tab(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text("Prescription Reader",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -63,7 +74,8 @@ class _NewHomeState extends State<NewHome> {
           child: TabBarView(
             children: [
                 ShowVisits(),
-                Prescription()
+                Prescription(),
+                TextRecognitionWidget()
             ],
           ),
         ),
