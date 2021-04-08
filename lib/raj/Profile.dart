@@ -13,7 +13,7 @@ class _ProfileuserState extends State<Profileuser> {
   int desiredmass=50;
   int Tcalories=0;
   int total=0;
-  int day=0;
+  int day=27;
   User user;
   CollectionReference userRef;
   Widget dayy=Text('Day :-');
@@ -23,7 +23,7 @@ class _ProfileuserState extends State<Profileuser> {
     if(temp<0){
       temp=temp*(-1);
     }
-    day=0;
+    day=27;
     while(temp<0){
       day++;
       temp=temp-200;
@@ -81,7 +81,7 @@ class _ProfileuserState extends State<Profileuser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text('MY Profile'),
+        title:Text('TRACK PROGRESS'),
       ),
       body: Container(
         child:Column(
@@ -95,7 +95,7 @@ class _ProfileuserState extends State<Profileuser> {
                   child: Column(
                     children: [
                       Icon(Icons.format_indent_increase),
-                      Text('Your Initial heath'),
+                      Text('Initial Weight'),
                       Text(startmass.toString()),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -140,7 +140,7 @@ class _ProfileuserState extends State<Profileuser> {
                   child: Column(
                     children: [
                       Icon(Icons.weekend),
-                      Text('Desired Health'),
+                      Text('Desired Weight'),
                       Text(desiredmass.toString()),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
