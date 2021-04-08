@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'form.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -165,7 +166,9 @@ class _MainPageState extends State<MainPage> {
           Navigator.push(context, MaterialPageRoute(builder: (context) => Tts()));
         } , child: Text("Pranav")),
 
-        ElevatedButton(onPressed: null, child: Text("Yukta")),
+        ElevatedButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Prescription()));
+        }, child: Text("Yukta")),
       ],
     ),
     body: Padding(

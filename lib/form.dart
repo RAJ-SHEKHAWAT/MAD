@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-class Form extends StatefulWidget {
+import 'database.dart';
+
+class Prescription extends StatefulWidget {
   @override
-  _FormState createState() => _FormState();
+  _PrescriptionState createState() => _PrescriptionState();
 }
 
-class _FormState extends State<Form> {
+class _PrescriptionState extends State<Prescription> {
   String uid="";
   final _formkey = GlobalKey<FormState>();
   String drname='';
   String description='';
   String medicines='';
   String error='';
-  void getuser() async{
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User user = auth.currentUser;
-    this.uid = user.uid;
-  }
+  User user = FirebaseAuth.instance.currentUser;
   @override
-  void initState() {
-    getuser();
-    super.initState();
-  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -40,11 +34,12 @@ class _FormState extends State<Form> {
                     focusColor: Colors.grey,
                     hintText: 'Doctor\'s Name',
                   ),
-                  validator: (val) => val.isEmpty ? 'This field is necessary' : null,
+                  validator: (val) => val.isEmpty ? 'This is necessary Field' : null,
                   onChanged: (val){
                     setState(() => drname=val);
                   },
                 ),
+
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -52,11 +47,13 @@ class _FormState extends State<Form> {
                     focusColor: Colors.grey,
                     hintText: 'Description',
                   ),
-                  validator: (val) => val.isEmpty ? 'This field is necessary' : null,
+                  validator: (val) => val.isEmpty ? 'Add a description' : null,
                   onChanged: (val){
                     setState(() => description=val);
                   },
                 ),
+
+
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -64,7 +61,7 @@ class _FormState extends State<Form> {
                     focusColor: Colors.grey,
                     hintText: 'Medicines',
                   ),
-                  validator: (val) => val.isEmpty ? 'This field is necessary' : null,
+                  validator: (val) => val.isEmpty ? 'Necessary Field' : null,
                   onChanged: (val){
                     setState(() => medicines=val);
                   },
@@ -74,8 +71,17 @@ class _FormState extends State<Form> {
                 ElevatedButton(
 //                    color: Colors.pink[400],
                     child: Text("Add"),
-                  onPressed: (){},
-                    ),
+                    onPressed: ()async{
+                      print(drname);
+                      print(description);
+                      print(medicines);
+//                      if(key.currentState.validate()){
+                        await DatabaseService(uid: user.uid).adddata(drname, description, medicines);
+                        Navigator.pop(context);
+//                      }
+                    }
+
+                ),
                 SizedBox(height: 20.0),
                 Text(error,
                   style: TextStyle(
@@ -87,9 +93,8 @@ class _FormState extends State<Form> {
           ),
 
         ],
-      ),
 
+      ),
     );
   }
 }
-
