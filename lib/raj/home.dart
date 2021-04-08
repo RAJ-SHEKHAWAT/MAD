@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medhelp/raj/Profile.dart';
 import 'package:medhelp/raj/colorsss.dart';
 import 'package:medhelp/raj/dailyhealthstatus.dart';
 import 'package:medhelp/raj/linechart.dart';
@@ -46,10 +47,15 @@ class _RHomeState extends State<RHome> {
         backgroundColor: Colors.white,
         elevation: 0.0,
         actions: [
-          CircleAvatar(
-            radius: 20.0,
-            child: ClipOval(
-              child: Image.asset('assets/avatar.png', fit: BoxFit.cover),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Profileuser()));
+            },
+            child: CircleAvatar(
+              radius: 20.0,
+              child: ClipOval(
+                child: Image.asset('assets/avatar.png', fit: BoxFit.cover),
+              ),
             ),
           ),
           SizedBox(
