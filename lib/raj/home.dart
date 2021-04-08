@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medhelp/raj/colorsss.dart';
+import 'package:medhelp/raj/dailyhealthstatus.dart';
 import 'package:medhelp/raj/linechart.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -436,7 +437,9 @@ class _RHomeState extends State<RHome> {
             IconButton(
               icon: Icon(Icons.add_chart),
               color: Colors.white,
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HealthdailyStatus()));
+              },
             ),
             SizedBox(width: 50,),
             IconButton(
