@@ -162,7 +162,7 @@ class _MainPageState extends State<MainPage> {
         ElevatedButton(onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => RHome()));
         }, child: Text("Raj")),   ElevatedButton(onPressed : (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Tts()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => TextRecognitionWidget()));
         } , child: Text("Pranav")),
 
         ElevatedButton(onPressed: null, child: Text("Yukta")),
@@ -173,7 +173,7 @@ class _MainPageState extends State<MainPage> {
       child: Column(
         children: [
           const SizedBox(height: 25),
-          TextRecognitionWidget(),
+
           const SizedBox(height: 15),
         ],
       ),

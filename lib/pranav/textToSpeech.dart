@@ -6,6 +6,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 
 class Tts extends StatefulWidget {
+  String text = "";
+  Tts({this.text});
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -16,10 +18,10 @@ class _MyAppState extends State<Tts> {
   FlutterTts flutterTts;
   dynamic languages;
   String language;
-  double volume = 0.5;
-  double pitch = 1.0;
-  double rate = 0.5;
-
+  double volume = 1;
+  double pitch = 1.4;
+  double rate = 0.7;
+  TextEditingController txt=TextEditingController();
   String _newVoiceText;
 
   TtsState ttsState = TtsState.stopped;
@@ -31,6 +33,12 @@ class _MyAppState extends State<Tts> {
   @override
   initState() {
     super.initState();
+    setState(() {
+      _newVoiceText=widget.text;
+      txt.text=widget.text;
+      _speak();
+    });
+
     initTts();
   }
 
@@ -114,28 +122,36 @@ class _MyAppState extends State<Tts> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return  Scaffold(
             bottomNavigationBar: bottomBar(),
             appBar: AppBar(
-              title: Text('Text To Speech',),
+              title: Text('Prescription Speech',),
               centerTitle: true,
-              backgroundColor: Colors.green,
             ),
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
-                  _inputSection(),
+//                  _inputSection(),
+                  Text("Set Language"),
                   languages != null ? _languageDropDownSection() : Text(""),
                   _buildSliders(),
-                  bottomBar(),
-                ]))));
+
+                  Card(
+                    elevation: 12.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(widget.text),
+                    ),
+                  ),
+
+                ])));
   }
 
   Widget _inputSection() => Container(
       alignment: Alignment.topCenter,
       padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
       child: TextField(
+        controller: txt,
         onChanged: (String value) {
           _onChange(value);
         },
@@ -156,7 +172,23 @@ class _MyAppState extends State<Tts> {
 
   Widget _buildSliders() {
     return Column(
-      children: [_volume(), _pitch(), _rate()],
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Text("Set Volume"),
+        ),
+        _volume(),
+        Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Text("Set Pitch"),
+        ),
+        _pitch(),
+        Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Text("Set Rate"),
+        ),
+        _rate()],
+
     );
   }
 

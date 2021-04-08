@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
 import 'package:medhelp/api/firebase_ml_api.dart';
+import 'package:medhelp/pranav/textToSpeech.dart';
 import 'package:medhelp/widget/text_area_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,12 +51,48 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     }
   }
 
+  Future<String> recogniseImpText(File imageFile) async {
+    if (imageFile == null) {
+      return 'No selected image';
+    } else {
+      dynamic visionImage = FirebaseVisionImage.fromFile(imageFile);
+      dynamic textRecognizer = FirebaseVision.instance.textRecognizer();
+      try {
+        VisionText visionText = await textRecognizer.processImage(visionImage);
+        await textRecognizer.close();
+        print(visionText.blocks.elementAt(2).toString());
+        String text = extractImpText(visionText);
+        return text.isEmpty ? 'No text found in the image' : text;
+      } catch (error) {
+        return error.toString();
+      }
+    }
+  }
+
+
   String extractText(VisionText visionText) {
+//    categorizeBlocks(visionText);
+//    String text = "Medicine Name: " + medicineName1 + " " + medicineName2 + "\n" + "Take " + numberOfUnits + " " + unitOfMeasure + " " + frequency + " times " + dayFrequency;
+////    text+="Medcine Name:";
+////    text+=medicine
+////
+    String text ="";
+    for (TextBlock block in visionText.blocks) {
+      for (TextLine line in block.lines) {
+        for (TextElement word in line.elements) {
+          text = text + word.text + ' ';
+        }
+        text = text + '\n';
+      }
+    }
+
+    return text;
+  }
+  String extractImpText(VisionText visionText) {
     categorizeBlocks(visionText);
-    String text = "Medicine Name: " + medicineName1 + " " + medicineName2 + "\n" + "Take " + numberOfUnits + " " + unitOfMeasure + " " + frequency + " times " + dayFrequency;
-//    text+="Medcine Name:";
-//    text+=medicine
-//
+    String text = "Medicine Name: " + medicineName1 + " " + medicineName2 + "\n" ;
+
+//    String text ="";
 //    for (TextBlock block in visionText.blocks) {
 //      for (TextLine line in block.lines) {
 //        for (TextElement word in line.elements) {
@@ -273,25 +310,52 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
 
   @override
-  Widget build(BuildContext context) => Expanded(
-    child: Column(
-      children: [
-        Expanded(child: buildImage()),
-        const SizedBox(height: 16),
-        ControlsWidget(
-          onClickedPickImage: pickImage,
-          onClickedScanText: scanText,
-          onClickedClear: clear,
-        ),
-        const SizedBox(height: 16),
-        TextAreaWidget(
-          text: text,
-          onClickedCopy: copyToClipboard,
-        ),
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Prescription Reader & Reminder"),),
+      body: ListView(
+        children: [
+          Expanded(child: buildImage()),
+          const SizedBox(height: 16),
+          ControlsWidget(
+            onClickedPickImage: pickImage,
+            onClickedScanText: scanText,
+            onClickedClear: clear,
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextAreaWidget(
+              text: text,
+              onClickedCopy: copyToClipboard,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Tts(text: text,)));
+            }, child: Text("Read Prescription")),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(onPressed: () {
+              scanImpText();
+//              Navigator.push(context,
+//                  MaterialPageRoute(builder: (context) => Tts(text: text,)));
+            }, child: Text("Scan Important details from Image")),
+          ),
 
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(onPressed: () {
+
+            }, child: Text("Set Reminder")),
+          )
+        ],
+      ),
+    );
+  }
   Widget buildImage() => Container(
     child: image != null
         ? Image.file(image)
@@ -313,6 +377,21 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     );
 
     String text = await recogniseText(image);
+    setText(text);
+    print(text);
+
+    Navigator.of(context).pop();
+  }
+  Future scanImpText() async {
+    showDialog(
+      context: context,
+
+      builder: (_) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    String text = await recogniseImpText(image);
     setText(text);
     print(text);
 
