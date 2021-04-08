@@ -1,16 +1,15 @@
-# medhelp
+# Health Bloom
 
-A Flutter Application to help people get reminder for their medical prescription based on smart AI tools.
+To track your medical history, fittness and help you with ML-Based utility tool. We, TrendyTechs present you Health Bloom which has following features :-
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+Store your previous prescriptions here.
 
-A few resources to get you started if this is your first Flutter project:
+Upload the image of your prescription, and the app will read allowed the pills you have to take at different time.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+It will give you time-to-time reminder of when to take pills.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+It also keeps track the steps you walk in a day, how much you sleep, and how much calories have you burnt in a day. 
+
+According to the above data, it will tell you how much time you would take to loose your weight by how much.
