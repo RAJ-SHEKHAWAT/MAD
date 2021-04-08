@@ -39,7 +39,6 @@ class _HealthdailyStatusState extends State<HealthdailyStatus> {
               return ListView(
                 children: snapshot.data.docs.map(
                       (document) {
-
                     return Container(
                       padding: EdgeInsets.all(20),
                       margin: EdgeInsets.all(10),
@@ -51,7 +50,7 @@ class _HealthdailyStatusState extends State<HealthdailyStatus> {
                       child: Column(
                         children: [
                           Text('Calories -> '+document['calories'].toString()),
-                          Text('Heart Beat -> '+document['heartbeat'].toString()),
+                          Text('Calories Intake-> '+document['cintake'].toString()),
                           Text('Sleep Hour -> '+document['sleep'].toString()),
                           Text('Training Time -> '+document['calories'].toString()),
                           Text('Walk -> '+document['calories'].toString()),

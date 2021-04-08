@@ -21,8 +21,8 @@ class _RHomeState extends State<RHome> {
   int calories=0;
   int sleep=0;
   int training=0;
-  int heartbeat=0;
-
+  int cintake=0;
+  int Tcalories=0;
   addDailyHealthRecord()async{
     CollectionReference users = FirebaseFirestore.instance.collection('Home');
     User user = FirebaseAuth.instance.currentUser;
@@ -36,11 +36,36 @@ class _RHomeState extends State<RHome> {
         "calories":calories,
         "sleep": sleep,
         "training":training,
-        "heartbeat":heartbeat,
+        "cintake":cintake,
       });
+
     // }
   }
-
+  User user;
+  CollectionReference userRef;
+  getUser(){
+    user = FirebaseAuth.instance.currentUser;
+    userRef= FirebaseFirestore.instance.collection("Home");
+  }
+  getData()async{
+    await userRef.doc(user.uid).get().then((dataa){
+      if (dataa.data().containsKey('Tcalories')){
+        if(dataa['Tcalories']!=null){
+          Tcalories=dataa['Tcalories'];
+        }
+      }
+    });
+  }
+  setData()async{
+    await userRef.doc(user.uid).update({
+      "Tcalories":Tcalories,
+    });
+  }
+  void initState() {
+    getUser();
+    getData();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +118,7 @@ class _RHomeState extends State<RHome> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle, color: Colors.deepOrange),
                           child: Icon(
-                            Icons.favorite_border,
+                            Icons.fastfood,
                             color: Colors.white,
                           ),
                         ),
@@ -101,15 +126,15 @@ class _RHomeState extends State<RHome> {
                           height: 10,
                         ),
                         Text(
-                          "Heart",
+                          "Food",
                           style: TextStyle(fontSize: 16.0),
                         ),
                         Text(
-                          heartbeat.toString(),
+                          cintake.toString(),
                           style: TextStyle(fontSize: 20),
                         ),
                         Text(
-                          "Per min",
+                          "in calories",
                           style: TextStyle(fontSize: 12.0),
                         ),
                         Row(
@@ -118,7 +143,7 @@ class _RHomeState extends State<RHome> {
                             GestureDetector(
                                 onTap: (){
                                   setState(() {
-                                    heartbeat=heartbeat+10;
+                                    cintake=cintake+100;
                                   });
                                 },
                                 child: Container(
@@ -131,7 +156,7 @@ class _RHomeState extends State<RHome> {
                             GestureDetector(
                                 onTap: (){
                                   setState(() {
-                                    heartbeat=heartbeat-10;
+                                    cintake=cintake+100;
                                   });
                                 },
                                 child: Container(
@@ -422,6 +447,8 @@ class _RHomeState extends State<RHome> {
         backgroundColor: MyColor.secondary,
         onPressed: (){
           addDailyHealthRecord();
+          Tcalories=cintake-sleep*46+calories;
+          setData();
         },
         child: Icon(
           Icons.add,
