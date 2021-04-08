@@ -124,12 +124,48 @@ class _SignInPageState extends State<SignInPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return isSigned?MainPage(title: "Main page"):Center(
-      child: ElevatedButton(
-        child: Text("Sign in with Google"),
-        onPressed: (){
-          signIn();
-        },
+    return isSigned?MainPage(title: "Main page"):Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 50),
+              OutlineButton(
+                splashColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+                highlightElevation: 0,
+                borderSide: BorderSide(color: Colors.grey),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image(
+                          image: AssetImage("assets/google_logo.png"),
+                          height: 35.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                onPressed: () {
+                 signIn();
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -163,14 +199,9 @@ class _MainPageState extends State<MainPage> {
       actions: [
 
         ElevatedButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => RHome()));
-        }, child: Text("Raj")),   ElevatedButton(onPressed : (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TextRecognitionWidget()));
-        } , child: Text("Pranav")),
-
-        ElevatedButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Prescription()));
-        }, child: Text("Yukta")),
+          FirebaseAuth.instance.signOut();
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInPage()));
+        }, child: Text("Sign Out")),
       ],
     ),
     body: Container(
