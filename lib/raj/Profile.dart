@@ -9,14 +9,14 @@ class Profileuser extends StatefulWidget {
 
 class _ProfileuserState extends State<Profileuser> {
   @override
-  int startmass=50;
+  int startmass=40;
   int desiredmass=50;
   int Tcalories=0;
   int total=0;
   int day=0;
   User user;
   CollectionReference userRef;
-
+  Widget dayy=Text('Day :-');
   progressCal(){
     int temp=(desiredmass-startmass)*7720;
     temp=temp+Tcalories;
@@ -28,6 +28,14 @@ class _ProfileuserState extends State<Profileuser> {
       day++;
       temp=temp-200;
     }
+    setState(() {
+      dayy=Text('Day :-'+day.toString());
+    });
+    print(temp);
+    print(Tcalories);
+    print(startmass);
+    print(desiredmass);
+    print(day);
   }
 
   getUser(){
@@ -43,10 +51,18 @@ class _ProfileuserState extends State<Profileuser> {
       }
       if (dataa.data().containsKey('desiredmass')){
         if(dataa['desiredmass']!=null){
-          startmass=dataa['desiredmass'];
+          desiredmass=dataa['desiredmass'];
         }
       }
+      if (dataa.data().containsKey('Tcalories')){
+        if(dataa['Tcalories']!=null){
+          Tcalories=dataa['Tcalories'];
+        }
+      }
+      print(Tcalories);
+      progressCal();
     });
+
   }
   setData()async{
     await userRef.doc(user.uid).update({
@@ -59,6 +75,7 @@ class _ProfileuserState extends State<Profileuser> {
 
     getUser();
     getData();
+
     super.initState();
   }
   Widget build(BuildContext context) {
@@ -172,7 +189,7 @@ class _ProfileuserState extends State<Profileuser> {
                 children: [
                   Divider(),
                   Text('Estimated Day require to reach destination'),
-                  Text('Day :-'+day.toString()),
+                  dayy,
                 ],
               )
             )),
@@ -193,12 +210,15 @@ class _ProfileuserState extends State<Profileuser> {
               ],
             )
             ),
-            Expanded(child: Container(
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.all(10),
-              decoration: boxdeco(),
-              child: Text('you are ahead of your target'),
-              // child: Text('your progress is goood'),
+            Expanded(child: GestureDetector(
+              onTap: getData,
+              child: Container(
+                margin: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
+                decoration: boxdeco(),
+                child: Text('REFRESH'),
+                // child: Text('your progress is goood'),
+              ),
             )),
 
           ],
