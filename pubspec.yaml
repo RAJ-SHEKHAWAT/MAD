@@ -33,6 +33,7 @@ dependencies:
   flutter_tts: ^3.0.0
   syncfusion_flutter_gauges: ^18.4.41
   fl_chart: ^0.12.2
+  numberpicker: ^2.0.1
 
 
 

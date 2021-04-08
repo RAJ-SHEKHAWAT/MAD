@@ -13,6 +13,15 @@ class RHome extends StatefulWidget {
 
 class _RHomeState extends State<RHome> {
   @override
+  int calories=0;
+  int sleep=0;
+  int training=0;
+  int heartbeat=0;
+  addCal(){
+    setState(() {
+      calories=calories+100;
+    });
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -72,12 +81,43 @@ class _RHomeState extends State<RHome> {
                           style: TextStyle(fontSize: 16.0),
                         ),
                         Text(
-                          "80",
+                          heartbeat.toString(),
                           style: TextStyle(fontSize: 20),
                         ),
                         Text(
                           "Per min",
                           style: TextStyle(fontSize: 12.0),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    heartbeat=heartbeat+10;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Icon(Icons.add))
+                            ),
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    heartbeat=heartbeat-10;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Icon(Icons.remove))
+                            ),
+                          ],
                         )
                       ],
                     ),
@@ -108,12 +148,43 @@ class _RHomeState extends State<RHome> {
                             style: TextStyle(fontSize: 16.0),
                           ),
                           Text(
-                            "950",
+                            calories.toString(),
                             style: TextStyle(fontSize: 20),
                           ),
                           Text(
                             "Kcal",
                             style: TextStyle(fontSize: 12.0),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      calories=calories+100;
+                                    });
+                                  },
+                                  child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.grey[200],
+                                ),
+                                  child: Icon(Icons.add))
+                              ),
+                              GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      calories=calories-100;
+                                    });
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.grey[200],
+                                      ),
+                                      child: Icon(Icons.remove))
+                              ),
+                            ],
                           )
                         ],
                       ),
@@ -140,12 +211,43 @@ class _RHomeState extends State<RHome> {
                           style: TextStyle(fontSize: 16.0),
                         ),
                         Text(
-                          "8:30",
+                          sleep.toString(),
                           style: TextStyle(fontSize: 20),
                         ),
                         Text(
                           "Hours",
                           style: TextStyle(fontSize: 12.0),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    sleep=sleep+1;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Icon(Icons.add))
+                            ),
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    sleep=sleep-1;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Icon(Icons.remove))
+                            ),
+                          ],
                         )
                       ],
                     ),
@@ -170,12 +272,43 @@ class _RHomeState extends State<RHome> {
                           style: TextStyle(fontSize: 16.0),
                         ),
                         Text(
-                          "2:00",
+                          training.toString(),
                           style: TextStyle(fontSize: 20),
                         ),
                         Text(
                           "Hours",
                           style: TextStyle(fontSize: 12.0),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    training=training+1;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Icon(Icons.add))
+                            ),
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    training=training-1;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Icon(Icons.remove))
+                            ),
+                          ],
                         )
                       ],
                     ),
