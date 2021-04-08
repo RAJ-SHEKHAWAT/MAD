@@ -10,9 +10,9 @@ class HealthdailyStatus extends StatefulWidget {
 class _HealthdailyStatusState extends State<HealthdailyStatus> {
   User user;
   CollectionReference userRef;
-  getUser()async{
-    user = await FirebaseAuth.instance.currentUser;
-    userRef= await FirebaseFirestore.instance.collection("Home");
+  getUser(){
+    user = FirebaseAuth.instance.currentUser;
+    userRef= FirebaseFirestore.instance.collection("Home");
   }
   @override
   void initState() {
@@ -41,9 +41,20 @@ class _HealthdailyStatusState extends State<HealthdailyStatus> {
                       (document) {
 
                     return Container(
+                      padding: EdgeInsets.all(20),
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(20),
+                        
+                      ),
                       child: Column(
                         children: [
-                          Text(document['calories'].toString()),
+                          Text('Calories -> '+document['calories'].toString()),
+                          Text('Heart Beat -> '+document['heartbeat'].toString()),
+                          Text('Sleep Hour -> '+document['sleep'].toString()),
+                          Text('Training Time -> '+document['calories'].toString()),
+                          Text('Walk -> '+document['calories'].toString()),
                         ],
                       ),
                     );
