@@ -18,9 +18,9 @@ class _PrescriptionState extends State<Prescription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Prescription"),
-      ),
+//      appBar: AppBar(
+//        title: Text("Prescription"),
+//      ),
       body: ListView(
         children: <Widget>[
           Form(
