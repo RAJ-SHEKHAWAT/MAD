@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "652119246641",
+    "project_id": "medhelp-ea3d4",
+    "storage_bucket": "medhelp-ea3d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652119246641:android:5cdee39ebfd89342031210",
+        "android_client_info": {
+          "package_name": "com.example.medhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652119246641-9jkvaung1itrevvs41hps34q6o2okmls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medhelp",
+            "certificate_hash": "a2be3063343d8bbffcb42543b13874c0ab69d660"
+          }
+        },
+        {
+          "client_id": "652119246641-8455i1mstb3tkfmn5ung2kplph1odi8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB2hsUp4Lj6Dr01KQMr-NlouLVaGSa06o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652119246641-8455i1mstb3tkfmn5ung2kplph1odi8b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
