@@ -71,13 +71,12 @@ String url="";
         source: ImageSource.gallery,
 
     );
-    List<File> images = [];
-    setState(() {
-      images.add(imgFile);
-    });
-    Upload(userSubmissionTime.toString(), images[0]);
+//    List<File> images = [];
+
+    File file = File(imgFile);
 //    presctext=await FirebaseMLApi.recogniseText(file);
-    setState(() async{
+    Upload(userSubmissionTime.toString(), file);
+    setState(() {
       _loadingPath = false;
 
 //      _paths != null ? _paths.map((e) => fileName = e.name).toString() : '...';
@@ -110,6 +109,7 @@ String url="";
       SnackBar snackBar = SnackBar(content: Text(e.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print(e);
+
     }
     setState(() {
       _loadingPath=false;
@@ -201,7 +201,7 @@ String url="";
                       print(description);
                       print(medicines);
 //                      if(key.currentState.validate()){
-                         DatabaseService(uid: user.uid).adddata(doctor: drname,description: description,medicines: medicines,url: url,prescText: presctext);
+                         DatabaseService(uid: user.uid).adddata(doctor: drname,description: description,medicines: medicines,url: url,prescText: presctext,date: userSubmissionTime);
                         Navigator.pop(context);
 //                      }
                     }

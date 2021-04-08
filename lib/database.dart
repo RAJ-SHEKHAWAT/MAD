@@ -6,6 +6,7 @@ class DatabaseService{
   final CollectionReference presCollection = FirebaseFirestore.instance.collection('prescription');
 
   Future adddata({String doctor, String description, String medicines,String url,DateTime date,String prescText}) async {
+    print(doctor+"jkjj");
     return await presCollection.doc(uid).collection('pres').doc(date.toString()).set({
       'doctor': doctor,
       'description' : description,
