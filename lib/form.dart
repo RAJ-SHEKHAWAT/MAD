@@ -71,12 +71,12 @@ class _PrescriptionState extends State<Prescription> {
                 ElevatedButton(
 //                    color: Colors.pink[400],
                     child: Text("Add"),
-                    onPressed: ()async{
+                    onPressed: (){
                       print(drname);
                       print(description);
                       print(medicines);
 //                      if(key.currentState.validate()){
-                        await DatabaseService(uid: user.uid).adddata(drname, description, medicines);
+                         DatabaseService(uid: user.uid).adddata(drname, description, medicines);
                         Navigator.pop(context);
 //                      }
                     }
