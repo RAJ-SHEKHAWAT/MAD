@@ -21,9 +21,6 @@ class TextRecognitionWidget extends StatefulWidget {
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   String text = '';
   File image;
-
-
-
   int medicineNameBlock;
   String medicineName2 = "";
   String medicineName1 = "";
@@ -312,7 +309,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Prescription Reader & Reminder"),),
+//      appBar: AppBar(title: Text("Prescription Reader & Reminder"),),
       body: ListView(
         children: [
           Expanded(child: buildImage()),

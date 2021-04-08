@@ -35,6 +35,8 @@ dependencies:
   fl_chart: ^0.12.2
   numberpicker: ^2.0.1
   flutter_local_notifications: ^5.0.0+1
+  file_picker: ^3.0.1
+  firebase_storage: ^8.0.2
 
 
 
