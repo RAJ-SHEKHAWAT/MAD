@@ -124,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return isSigned?MainPage(title: "Main page"):Scaffold(
+    return isSigned?MainPage(title: "Health Bloom"):Scaffold(
       body: SafeArea(
         child: Center(
           child: Column(
@@ -195,9 +195,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
+      automaticallyImplyLeading: false,
       title: Text(widget.title),
       actions: [
-
         ElevatedButton(onPressed: (){
           FirebaseAuth.instance.signOut();
           Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInPage()));
