@@ -13,6 +13,7 @@ class RHome extends StatefulWidget {
 
 class _RHomeState extends State<RHome> {
   @override
+  int walk=0;
   int calories=0;
   int sleep=0;
   int training=0;
@@ -124,11 +125,11 @@ class _RHomeState extends State<RHome> {
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: MyColor.secondary),
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                      ),
+                      // padding: EdgeInsets.symmetric(vertical: 20),
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(color: MyColor.secondary),
+                      //   borderRadius: BorderRadius.all(Radius.circular(30)),
+                      // ),
                       child: Column(
                         children: [
                           Container(
@@ -336,7 +337,11 @@ class _RHomeState extends State<RHome> {
                       RangePointer(
                           color: MyColor.secondary,
                           value: 60,
-                          onValueChanged: (value) {},
+                          onValueChanged: (value) {
+                            setState(() {
+                              walk=value.toInt();
+                            });
+                          },
                           cornerStyle: CornerStyle.bothCurve,
                           onValueChangeEnd: (value) {},
                           onValueChanging: (value) {},
@@ -350,7 +355,7 @@ class _RHomeState extends State<RHome> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "2.0",
+                              walk.toString(),
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
