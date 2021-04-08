@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:medhelp/pranav/textToSpeech.dart';
+import 'package:medhelp/raj/home.dart';
 import 'package:medhelp/widget/text_recognition_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -156,8 +158,13 @@ class _MainPageState extends State<MainPage> {
     appBar: AppBar(
       title: Text(widget.title),
       actions: [
-        ElevatedButton(onPressed: null, child: Text("Raj")),
-        ElevatedButton(onPressed: null, child: Text("Pranav")),
+
+        ElevatedButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => RHome()));
+        }, child: Text("Raj")),   ElevatedButton(onPressed : (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Tts()));
+        } , child: Text("Pranav")),
+
         ElevatedButton(onPressed: null, child: Text("Yukta")),
       ],
     ),
